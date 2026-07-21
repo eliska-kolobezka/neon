@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Neon Club Praha – Noční klub & Bar v centru Prahy</title>
+  <meta name="description" content="Nejlepší noční klub v Praze. Živé show, skvělé drinky, vstup zdarma. Otevřeno každý den od 12:00 do 05:00. Balbínova 21, Praha 2." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Neon Club Praha – Noční klub & Bar" />
+  <meta property="og:description" content="Nejlepší noční klub v Praze. Živé show, skvělé drinky, vstup zdarma." />
+  <meta property="og:type" content="website" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --neon-purple: #9b27af;
+      --neon-pink: #e91e8c;
+      --neon-glow: #c020c0;
+      --dark-bg: #0a0a0f;
+      --dark-card: #10101a;
+      --dark-border: #221530;
+      --text-main: #f0e6f6;
+      --text-muted: #9080a8;
+      --gold: #f0c040;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 18px;
+      background: var(--dark-bg);
+      color: var(--text-main);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    button, a { touch-action: manipulation; }
+    /* Emoji rendering */
+    .reason-icon, .loc-row-icon { font-style: normal; }
+
+    /* ===== UTILITIES ===== */
+
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: transform 0.2s, opacity 0.2s;
+      box-shadow: 0 4px 24px rgba(155, 39, 175, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--text-main);
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--neon-pink); color: var(--neon-pink); }
+
+    /* ===== HEADER ===== */
+    header {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.94);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--dark-border);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 900;
+      letter-spacing: 5px;
+      color: var(--neon-pink);
+      text-shadow: 0 0 18px var(--neon-glow);
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .header-meta a { color: var(--text-muted); transition: color 0.2s; }
+    .header-meta a:hover { color: var(--neon-pink); }
+
+    .open-pill {
+      background: rgba(76,175,80,0.12);
+      color: #66bb6a;
+      padding: 0.25rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid rgba(76,175,80,0.25);
+    }
+
+    .header-cta {
+      background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+      color: #fff;
+      padding: 0.55rem 1.4rem;
+      border-radius: 7px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .header-cta:hover { opacity: 0.85; }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background:
+        radial-gradient(ellipse at 25% 60%, rgba(155,39,175,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 25%, rgba(233,30,140,0.14) 0%, transparent 50%),
+        var(--dark-bg);
+    }
+
+    .hero-dots {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background-image:
+        radial-gradient(circle, rgba(155,39,175,0.08) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 820px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6.5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 .grad {
+      background: linear-gradient(135deg, #c060e0, var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-lead {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-chips {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .chip {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--dark-border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+    .chip b { color: var(--text-main); }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: var(--dark-card);
+      border-top: 1px solid var(--dark-border);
+      border-bottom: 1px solid var(--dark-border);
+      padding: 2.5rem 2rem;
+    }
+
+    .stats-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      text-align: center;
+    }
+
+    @media (max-width: 580px) {
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, #c060e0, var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-lbl {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* ===== HAPPY HOURS SECTION ===== */
+    .happy-section {
+      background: var(--dark-bg);
+      padding: 2.5rem 2rem;
+    }
+
+    .happy-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(100deg, rgba(240,192,64,0.07) 0%, rgba(240,192,64,0.02) 100%);
+      border: 1px solid rgba(240,192,64,0.2);
+      border-radius: 16px;
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .happy-label {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(240,192,64,0.55);
+    }
+
+    .happy-divider {
+      width: 1px;
+      height: 2.5rem;
+      background: rgba(240,192,64,0.2);
+    }
+
+    .happy-time {
+      font-size: 2.6rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+      text-shadow: 0 0 30px rgba(240,192,64,0.3);
+    }
+
+    .happy-sub {
+      font-size: 1rem;
+      color: rgba(240,192,64,0.5);
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 500px) {
+      .happy-inner { padding: 1.5rem 1.5rem; gap: 1.2rem; }
+      .happy-divider { display: none; }
+    }
+
+    /* ===== PHOTO BLOCKS ===== */
+    .photo-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+    }
+
+    @media (max-width: 760px) {
+      .photo-block { grid-template-columns: 1fr; min-height: auto; }
+      .photo-block .pb-img { min-height: 280px; }
+      .photo-block.reverse .pb-img { order: -1; }
+    }
+
+    .pb-img {
+      position: relative;
+      overflow: hidden;
+      background: var(--dark-card);
+    }
+
+    /* Placeholder gradients – nahraďte src atributy skutečnými fotkami */
+    .pb-img.dancers {
+      background:
+        linear-gradient(160deg, rgba(155,39,175,0.6) 0%, rgba(233,30,140,0.3) 50%, rgba(10,10,15,0.9) 100%),
+        repeating-linear-gradient(
+          45deg,
+          rgba(155,39,175,0.05) 0px, rgba(155,39,175,0.05) 2px,
+          transparent 2px, transparent 20px
+        );
+    }
+
+    .pb-img.bar-img {
+      background:
+        linear-gradient(160deg, rgba(20,10,40,0.9) 0%, rgba(155,39,175,0.4) 50%, rgba(233,30,140,0.25) 100%),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(233,30,140,0.04) 0px, rgba(233,30,140,0.04) 2px,
+          transparent 2px, transparent 24px
+        );
+    }
+
+    .pb-img.party-img {
+      background:
+        linear-gradient(160deg, rgba(233,30,140,0.5) 0%, rgba(155,39,175,0.4) 50%, rgba(10,10,15,0.85) 100%),
+        repeating-linear-gradient(
+          30deg,
+          rgba(240,192,64,0.04) 0px, rgba(240,192,64,0.04) 2px,
+          transparent 2px, transparent 22px
+        );
+    }
+
+    .pb-img img {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+      transition: transform 0.5s ease, opacity 0.3s;
+    }
+    .photo-block:hover .pb-img img { transform: scale(1.03); opacity: 0.85; }
+
+    .pb-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 4rem;
+      background: var(--dark-bg);
+    }
+
+    @media (max-width: 900px) {
+      .pb-text { padding: 3rem 2rem; }
+    }
+
+    .pb-label {
+      color: var(--neon-pink);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .pb-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .pb-text p {
+      color: var(--text-muted);
+      font-size: 1.08rem;
+      line-height: 1.8;
+      margin-bottom: 1.6rem;
+      max-width: 440px;
+    }
+
+    .pb-text .pb-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .pb-detail-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .pb-detail-row::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--neon-pink);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Alternating bg on photo blocks */
+    .photo-block:nth-child(even) .pb-text {
+      background: var(--dark-card);
+    }
+
+    /* ===== REASONS ===== */
+    .reasons-section {
+      padding: 6rem 2rem;
+      background: var(--dark-card);
+    }
+
+    .reasons-head {
+      max-width: 700px;
+      margin: 0 auto 4rem;
+      text-align: center;
+    }
+
+    .section-label {
+      color: var(--neon-pink);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .reasons-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--dark-border);
+      border: 1px solid var(--dark-border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 720px) {
+      .reasons-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 460px) {
+      .reasons-grid { grid-template-columns: 1fr; }
+    }
+
+    .reason-card {
+      background: var(--dark-bg);
+      padding: 2rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: background 0.2s;
+    }
+    .reason-card:hover { background: #0e0e1a; }
+
+    .reason-num {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--neon-pink);
+      letter-spacing: 2px;
+      opacity: 0.6;
+    }
+
+    .reason-icon { font-size: 2rem; }
+
+    .reason-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .reason-card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    /* ===== LOCATION ===== */
+    .location-section {
+      padding: 6rem 2rem;
+      background: var(--dark-bg);
+    }
+
+    .location-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) {
+      .location-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    .loc-text .section-label { margin-bottom: 0.7rem; }
+    .loc-text .section-title { margin-bottom: 1.5rem; }
+
+    .loc-rows { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+
+    .loc-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 1.2rem;
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 10px;
+    }
+
+    .loc-row-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+    .loc-row strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.25rem;
+    }
+
+    .loc-row span { font-size: 1rem; }
+    .loc-row a { color: var(--neon-pink); }
+
+    .map-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      height: 360px;
+      border: 1px solid var(--dark-border);
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(25%) invert(88%) hue-rotate(178deg);
+    }
+
+    /* ===== FINAL CTA ===== */
+    .final-cta {
+      padding: 7rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .final-cta-bg {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(155,39,175,0.18) 0%, transparent 65%);
+    }
+
+    .final-cta-inner {
+      position: relative;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .free-badge {
+      display: inline-block;
+      background: rgba(240,192,64,0.1);
+      border: 1px solid rgba(240,192,64,0.35);
+      color: var(--gold);
+      padding: 0.45rem 1.3rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 1rem;
+    }
+
+    .final-cta h2 .grad {
+      background: linear-gradient(135deg, #c060e0, var(--neon-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .final-cta p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .final-cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== MINI FOOTER ===== */
+    .mini-footer {
+      background: var(--dark-card);
+      border-top: 1px solid var(--dark-border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .mini-footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .mini-footer a { color: var(--text-muted); transition: color 0.2s; }
+    .mini-footer a:hover { color: var(--neon-pink); }
+
+    /* ===== RESPONSIVE MISC ===== */
+    @media (max-width: 600px) {
+      .header-meta { display: none; }
+      .hero-ctas, .final-cta-btns { flex-direction: column; align-items: center; }
+      .pb-text { padding: 2.5rem 1.5rem; }
+    }
+
+    /* iOS safe area pro header */
+    @supports (padding-top: env(safe-area-inset-top)) {
+      header { padding-top: env(safe-area-inset-top); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== MAIN ===== -->
+<div id="main-content">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">NEON</div>
+      <div class="header-meta">
+        <span class="open-pill">● Otevřeno do 05:00</span>
+        <span>Balbínova 21, Praha 2</span>
+        <a href="tel:+420733121022">733 121 022</a>
+      </div>
+      <a href="https://www.neonclub.cz/" target="_blank" rel="noopener" class="header-cta">
+        Vstoupit do Neonu →
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-dots"></div>
+    <div class="hero-content">
+      <h1>Noc, na kterou<br /><span class="grad">nezapomenete</span></h1>
+      <p class="hero-lead">Legendární noční klub v centru Prahy. Živé show, skvělý bar, neuvěřitelná atmosféra – a vstup zdarma každý den.</p>
+      <div class="hero-chips">
+        <span class="chip"><b>VSTUP ZDARMA</b></span>
+        <span class="chip">12:00 – 05:00 každý den</span>
+        <span class="chip">3 patra zábavy</span>
+        <span class="chip">Centrum Prahy</span>
+      </div>
+      <div class="hero-ctas">
+        <a href="https://www.neonclub.cz/" target="_blank" rel="noopener" class="btn-primary">
+          Zobrazit kdo je dnes v klubu →
+        </a>
+        <a href="#location" class="btn-outline">Jak se k nám dostat</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div>
+        <div class="stat-num">25+</div>
+        <div class="stat-lbl">nádherných tanečnic denně</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-lbl">patra plná zábavy</div>
+      </div>
+      <div>
+        <div class="stat-num">0&nbsp;Kč</div>
+        <div class="stat-lbl">vstupné – vždy</div>
+      </div>
+      <div>
+        <div class="stat-num">17+</div>
+        <div class="stat-lbl">let tradice v Praze</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HAPPY HOURS -->
+  <div class="happy-section">
+    <div class="happy-inner">
+      <span class="happy-label">Happy Hours</span>
+      <div class="happy-divider"></div>
+      <span class="happy-time">12:00 – 20:00</span>
+      <div class="happy-divider"></div>
+      <span class="happy-sub">Každý den · zvýhodněné ceny drinků</span>
+    </div>
+  </div>
+
+  <!-- PHOTO BLOCK 1: TANEČNICE -->
+  <div class="photo-block">
+    <div class="pb-img dancers">
+      <img src="tanec.png" alt="Go-go show Neon Club Praha" />
+    </div>
+    <div class="pb-text">
+      <p class="pb-label">Live Show</p>
+      <h2>Každý den nové<br />tváře na podiu</h2>
+      <p>Více než 25 nádherných tanečnic denně – go-go, pole dance, živá vystoupení. Každý večer jiný, každý večer lepší.</p>
+      <div class="pb-detail">
+        <div class="pb-detail-row">Go-go a pole dance každý den</div>
+        <div class="pb-detail-row">Online přehled kdo je dnes v klubu</div>
+        <div class="pb-detail-row">3 patra zábavy a soukromí</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO BLOCK 2: BAR (reversed) -->
+  <div class="photo-block reverse">
+    <div class="pb-text">
+      <p class="pb-label">Bar &amp; Drinky</p>
+      <h2>Nejlepší drinky<br />za fér ceny</h2>
+      <p>Míchané koktejly, whisky, víno, pivo – vše namíchané přímo u baru našimi barmany. Bez přemrštěných cen a bez překvapení na účtu.</p>
+      <div class="pb-detail">
+        <div class="pb-detail-row">Happy Hours každý den 12:00 – 20:00</div>
+        <div class="pb-detail-row">Nejlevnější míchané drinky v Praze</div>
+        <div class="pb-detail-row">Platba kartou i hotovostí</div>
+        <div class="pb-detail-row">Bankomat přímo v klubu</div>
+      </div>
+    </div>
+    <div class="pb-img bar-img">
+      <img src="bar2.png" alt="Bar Neon Club Praha" />
+    </div>
+  </div>
+
+  <!-- PHOTO BLOCK 3: ROZLUČKA -->
+  <div class="photo-block">
+    <div class="pb-img party-img">
+      <img src="rozlucka.png" alt="Rozlučka se svobodou Neon Club Praha" />
+    </div>
+    <div class="pb-text">
+      <p class="pb-label">Rozlučky se svobodou</p>
+      <h2>Nejlepší rozlučka<br />ve vašem životě</h2>
+      <p>Pořádáme nezapomenutelné rozlučky se svobodou na míru pro vaši partu. Vyberete si balíček, my se postaráme o zbytek.</p>
+      <div class="pb-detail">
+        <div class="pb-detail-row">Dva balíčky: MINI a MAXI</div>
+        <div class="pb-detail-row">Celý program na míru pro vaši skupinu</div>
+        <div class="pb-detail-row">Centrum Prahy – ideální start i cíl tahu</div>
+        <div class="pb-detail-row">Rezervace předem, žádné starosti</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REASONS -->
+  <section class="reasons-section">
+    <div class="reasons-head">
+      <p class="section-label">Proč Neon Club</p>
+      <h2 class="section-title">Proč je Neon nejlepší noční klub v Praze</h2>
+    </div>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="reason-num">01</div>
+        <div class="reason-icon">🎟️</div>
+        <h3>Vstup zdarma</h3>
+        <p>Vždy a bez výjimky. Věříme, že jakmile přijdete, budete chtít zůstat.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">02</div>
+        <div class="reason-icon">💃</div>
+        <h3>25+ tanečnic denně</h3>
+        <p>Každý den nové dívky a online přehled, kdo je právě v klubu.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">03</div>
+        <div class="reason-icon">🍸</div>
+        <h3>Nejlevnější drinky</h3>
+        <p>Fér ceny bez překvapení. Happy Hours každý den od 12 do 20 hodin.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">04</div>
+        <div class="reason-icon">📍</div>
+        <h3>Centrum Prahy</h3>
+        <p>Minuty od Václavského náměstí a metra Muzeum. Skvělý start nebo cíl.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">05</div>
+        <div class="reason-icon">🏢</div>
+        <h3>3 patra zábavy</h3>
+        <p>Vždy je kam jít. Bar, podium, soukromí – vše pod jednou střechou.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">06</div>
+        <div class="reason-icon">🎊</div>
+        <h3>Rozlučky na míru</h3>
+        <p>Balíčky MINI a MAXI. Nejlepší rozlučka se svobodou v Praze.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">07</div>
+        <div class="reason-icon">❄️</div>
+        <h3>Klimatizovaný interiér</h3>
+        <p>Pohodlné kožené sedačky, diskrétní atmosféra. Cítíte se tu skvěle.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">08</div>
+        <div class="reason-icon">💳</div>
+        <h3>Platba kartou</h3>
+        <p>Visa, Mastercard i Maestro. Bankomat přímo v prostoru klubu.</p>
+      </div>
+      <div class="reason-card">
+        <div class="reason-num">09</div>
+        <div class="reason-icon">🌙</div>
+        <h3>Otevřeno do 05:00</h3>
+        <p>Každý den od poledne do pěti ráno. Žádné zavírání uprostřed večera.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location" class="location-section">
+    <div class="location-inner">
+      <div class="loc-text">
+        <p class="section-label">Kde nás najdete</p>
+        <h2 class="section-title">Srdce Prahy 2</h2>
+        <div class="loc-rows">
+          <div class="loc-row">
+            <span class="loc-row-icon">📍</span>
+            <div>
+              <strong>Adresa</strong>
+              <span>Balbínova 733/21, Praha 2<br />Tramvaj: zastávka Italská · Metro: Muzeum</span>
+            </div>
+          </div>
+          <div class="loc-row">
+            <span class="loc-row-icon">🕐</span>
+            <div>
+              <strong>Otevírací doba</strong>
+              <span>Každý den 12:00 – 05:00<br />Happy Hours: 12:00 – 20:00</span>
+            </div>
+          </div>
+          <div class="loc-row">
+            <span class="loc-row-icon">📞</span>
+            <div>
+              <strong>Telefon</strong>
+              <span><a href="tel:+420733121022">+420 733 121 022</a></span>
+            </div>
+          </div>
+          <div class="loc-row">
+            <span class="loc-row-icon">✉️</span>
+            <div>
+              <strong>E-mail</strong>
+              <span><a href="mailto:info@neonclub.cz">info@neonclub.cz</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2560.389167801883!2d14.432970251209426!3d50.0790002218398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b948e21a4a1f7%3A0xf73c811a5fb3bcac!2sNight%20club%20Neon!5e0!3m2!1scs!2scz!4v1581283908129!5m2!1scs!2scz"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Mapa Neon Club Praha"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-bg"></div>
+    <div class="final-cta-inner">
+      <div class="free-badge">★ VSTUP ZDARMA ★</div>
+      <h2>Rezervujte si místo<br /><span class="grad">pro dnešní večer</span></h2>
+      <p>Zavolejte nám a my se postaráme o zbytek. Vstup zdarma, skvělé drinky, atmosféra, která vás dostane.</p>
+      <div class="final-cta-btns">
+        <a href="tel:+420733121022" class="btn-primary" style="font-size:1.2rem; padding: 1.1rem 2.8rem; letter-spacing: 1px;">
+          📞 733 121 022
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MINI FOOTER -->
+  <div class="mini-footer">
+    <p>© 2025 Neon Club Praha · Balbínova 21, Praha 2 · <a href="https://www.neonclub.cz/cs/provozni-rad-459/" target="_blank" rel="noopener">Provozní řád</a></p>
+  </div>
+
+</div><!-- /main-content -->
+
+
+</body>
+</html>
