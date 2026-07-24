@@ -154,6 +154,12 @@
       color: var(--text-muted);
     }
 
+    .header-meta-details {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
     .header-meta a { color: var(--text-muted); transition: color 0.2s; }
     .header-meta a:hover { color: var(--neon-pink); }
 
@@ -703,7 +709,9 @@
 
     /* ===== RESPONSIVE MISC ===== */
     @media (max-width: 600px) {
-      .header-meta { display: none; }
+      .header-meta-details { display: none; }
+      .header-cta { display: none; }
+      .open-pill { font-size: 0.72rem; padding: 0.25rem 0.6rem; white-space: nowrap; }
       .hero-ctas, .final-cta-btns { flex-direction: column; align-items: center; }
       .pb-text { padding: 2.5rem 1.5rem; }
     }
@@ -725,8 +733,10 @@
       <div class="logo">NEON</div>
       <div class="header-meta">
         <span class="open-pill" id="open-status">● Otevřeno do 05:00</span>
-        <span>Balbínova 21, Praha 2</span>
-        <a href="tel:+420733121022">733 121 022</a>
+        <span class="header-meta-details">
+          <span>Balbínova 21, Praha 2</span>
+          <a href="tel:+420733121022">733 121 022</a>
+        </span>
       </div>
       <a href="#location" class="header-cta">
         Vstoupit do Neonu →
