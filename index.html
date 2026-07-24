@@ -167,6 +167,12 @@
       border: 1px solid rgba(76,175,80,0.25);
     }
 
+    .open-pill.closed {
+      background: rgba(144,128,168,0.12);
+      color: var(--text-muted);
+      border-color: rgba(144,128,168,0.25);
+    }
+
     .header-cta {
       background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
       color: #fff;
@@ -718,7 +724,7 @@
     <div class="header-inner">
       <div class="logo">NEON</div>
       <div class="header-meta">
-        <span class="open-pill">● Otevřeno do 05:00</span>
+        <span class="open-pill" id="open-status">● Otevřeno do 05:00</span>
         <span>Balbínova 21, Praha 2</span>
         <a href="tel:+420733121022">733 121 022</a>
       </div>
@@ -971,6 +977,29 @@
 
 </div><!-- /main-content -->
 
+<script>
+  (function () {
+    var pill = document.getElementById('open-status');
+    if (!pill) return;
+
+    function updateOpenStatus() {
+      var hour = parseInt(
+        new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Europe/Prague',
+          hour: 'numeric',
+          hourCycle: 'h23'
+        }).format(new Date()),
+        10
+      );
+      var isOpen = hour >= 12 || hour < 5;
+      pill.textContent = isOpen ? '● Otevřeno do 05:00' : '● Zavřeno · otevíráme v 12:00';
+      pill.classList.toggle('closed', !isOpen);
+    }
+
+    updateOpenStatus();
+    setInterval(updateOpenStatus, 60000);
+  })();
+</script>
 
 </body>
 </html>
